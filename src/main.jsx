@@ -10,7 +10,7 @@ import ProductPage from "./pages/product/index.jsx";
 import CartPage from "./pages/cart/index.jsx";
 import LoginPage from "./pages/login/index.jsx";
 import AccountPage from "./pages/account/index.jsx";
-import RegisterPage from "./pages/account/index.jsx";
+import RegisterPage from "./pages/register/index.jsx";
 
 const router = createBrowserRouter([
   {
