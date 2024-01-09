@@ -8,7 +8,7 @@ const HeaderLayout = () => {
             <div className="flex justify-between">
                 <img src="./src/assets/icons/search.svg" alt="loupe" />
                 <div>LOGO</div>
-                <div className="flex gap-1">
+                <div className="flex gap-2">
                     <img src="./src/assets/icons/cart.svg" alt="panier" />
                     <img src="./src/assets/icons/profile.svg" alt="panier" />
                 </div>

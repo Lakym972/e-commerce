@@ -7,7 +7,7 @@ const Navbar = () => {
 
     return (
         <>
-        <div>
+        <div className="navbar">
             <ul className="flex gap-3 justify-center text-primary">
                 <li className="hover:text-dark_primary"><Link to="/">Home</Link></li>
                 <li className="hover:text-dark_primary"><Link to="/nos-produits" >Nos Produits</Link></li>

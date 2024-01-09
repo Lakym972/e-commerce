@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbar{
+    height: 8.25rem;
+}
+
+.h2 {
+font-family: 'Clash Display', sans-serif;
+font-size: 2rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%;
+}
+
+.body-large {
+font-family: 'Satoshi', sans-serif;
+font-size: 1.125rem;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+}
