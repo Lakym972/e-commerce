@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.navbar{
-    height: 8.25rem;
-}
-
 .h2 {
 font-family: 'Clash Display', sans-serif;
 font-size: 2rem;

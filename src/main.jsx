@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
@@ -27,8 +27,19 @@ const router = createBrowserRouter([
   }
 ])
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+export const UserContext = createContext(null)
+
+function App() {
+  const [user, setUser] = useState(null);
+  return (
+    
+    <UserContext.Provider value={{ user, setUser }}>
+    <RouterProvider router={router}>
+      <HeaderLayout />
+    </RouterProvider>
+  </UserContext.Provider>
+
+  )
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
