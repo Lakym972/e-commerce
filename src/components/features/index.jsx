@@ -31,7 +31,7 @@ function Features() {
     <Typography customClasses="flex justify-center m-[3.19rem]" tag="h3">What makes our brand different</Typography>
     <div className='flex justify-between'>{
         features.map(feature => 
-            <div key={feature}>
+            <div key={feature.title}>
                 <img className='mb-4' src={feature.icon} alt="icones" />
                 <Typography customClasses="mb-[0.5rem]" tag="h4">{feature.title}</Typography>
                 <Typography>{feature.content}</Typography>

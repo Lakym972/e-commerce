@@ -1,10 +1,11 @@
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import InputWithLabel from "../common/InputWithLabel.jsx"
 import Typography from "../common/Typography.jsx"
+import { UserContext } from "../../main.jsx"
 
 
 function LoginForm() {
-  const [User, setUser] = useState(null)
+  const {user, setUser} = useContext(UserContext)
   const [errors, setErrors] = useState([])
 
   const logRef = useRef(null);
@@ -20,12 +21,12 @@ function LoginForm() {
 
     if(!email.includes("@"))
     setErrors((previousValue) => {
-      return [...previousValue, "format d'email incorrect"]
+      return [...previousValue, " format d'email incorrect "]
     })
 
     if(password === "")
     setErrors((previousValue) => {
-      return [...previousValue, "pas de mot de passe"]
+      return [...previousValue, " pas de mot de passe "]
     })
 
     if (errors.length > 0) {
@@ -63,8 +64,7 @@ function LoginForm() {
   
         </form>
         <div>{
-          User ? <p>Vous êtes connecté</p> : null}
-
+          user ? <p>Vous êtes connecté</p> : errors}
         </div>
       </div>
     </div>

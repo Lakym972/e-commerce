@@ -1,35 +1,29 @@
+import { Link } from "react-router-dom";
 import Button from "../common/Button.jsx"
 import Typography from "../common/Typography.jsx"
-import { useEffect, useState } from "react"
+import useFetch from "../../hooks/useFetch.js";
 
 
 function Listing() {
 
-    const [items, setItems] = useState([])
-
-    useEffect(()=> {
-        const data = async () => {
-            const response = await fetch('https://passerelle-shop-api.julienpoirier-webdev.com/products');
-            const results = await response.json();
-            setItems(results);
-
-            console.log(results);
-        }
-        data();
-    },[]);
+    const { dataFetched, loading, error } = useFetch({
+        url: "https://passerelle-shop-api.julienpoirier-webdev.com/products",
+      });
 
     return (
         <>
+        {loading ? <p>Chargement</p> : null}
+        {error ? <p>{error}</p> : null}
         <Typography customClasses="mt-[5rem] mb-[2rem]" tag="h2">New ceramics</Typography>
 
         <div className="flex justify-between">{
-            items.length > 0 ? items.map((item) => {
+            dataFetched && dataFetched.length > 0 ? dataFetched.map((item) => {
                 return(
-                <div key={item}>
+                <Link key={item._id} to={`/produit/${item._id}`}>
                     <img className="w-[19rem] h-[23rem]" src={item.mainImageURL} alt="figurine" />
                     <Typography tag="h4">{item.name}</Typography>
                     <p>{item.price}</p>
-                </div>
+                </Link>
                 )
             }) 
             : null
