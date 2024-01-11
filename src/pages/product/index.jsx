@@ -1,35 +1,18 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import CartContext from "../../context/CartContext";
 
 
 const ProductPage = () => {
-  const [cart, setCart] = useState(null);
+
   const { id } = useParams();
+
   const { dataFetched, loading, error } = useFetch({
     url: `https://passerelle-shop-api.julienpoirier-webdev.com/products/${id}`,
   });
 
-  const isProductInCart = () => {
-    return cart && cart.length > 0;
-  };
-
-  const getQuantityInCart = () => {
-    console.log("la quantité est de 0");
-  };
-
-  const addToCart = (items) => {
-    setCart([
-      {
-        productId: items._id,
-        quantity: 1,
-      },
-    ]);
-  };
-
-  const removeOneFromCart = () => {
-    console.log("Moins 1 au panier");
-  };
+  const { addToCart, removeOneFromCart, getQuantityInCart, isProductInCart } = useContext(CartContext);
 
   return (
     <div className="flex justify-center border-y">
@@ -49,7 +32,7 @@ const ProductPage = () => {
             />
           </div>
 
-          {isProductInCart() ? (
+          {isProductInCart(id) ? (
             <div className="flex items-center mt-4">
               <button
                 onClick={() => addToCart(dataFetched)}
@@ -58,7 +41,7 @@ const ProductPage = () => {
                 +
               </button>
               <div className="px-4 py-2 border-t border-b border-gray-300">
-                Quantité dans le panier: {getQuantityInCart(dataFetched)}
+                Quantité dans le panier: {getQuantityInCart(dataFetched._id)}
               </div>
               <button
                 onClick={() => removeOneFromCart(dataFetched)}

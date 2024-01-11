@@ -11,6 +11,7 @@ import CartPage from "./pages/cart/index.jsx";
 import LoginPage from "./pages/login/index.jsx";
 import AccountPage from "./pages/account/index.jsx";
 import RegisterPage from "./pages/register/index.jsx";
+import CartContextProvider from './context/CartContextProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,12 +33,13 @@ export const UserContext = createContext(null)
 function App() {
   const [user, setUser] = useState(null);
   return (
-    
+    <CartContextProvider>
     <UserContext.Provider value={{ user, setUser }}>
     <RouterProvider router={router}>
       <HeaderLayout />
     </RouterProvider>
   </UserContext.Provider>
+  </CartContextProvider>
 
   )
 }
