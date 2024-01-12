@@ -58,14 +58,10 @@ const CartContextProvider = ({ children }) => {
   const removeOneFromCart = (item) => {
     const isInCart = isProductInCart(item._id);
     if (isInCart) {
-      const myItemInCart = cart.find((oneItemInCart) => {
-        return oneItemInCart.productId === item._id;
-      })
+      const myItemInCart = cart.find((oneItemInCart) => oneItemInCart.productId === item._id);
       if (myItemInCart.quantity === 1) {
-        setCart(cart.filter((oneItem) => {
-            oneItem.productId !== item._id
+        setCart(cart.filter((oneItem) => oneItem.productId !== item._id));
           return;
-        }))
       } else {
         setCart(cart.map((oneItemInCart) => {
           if (oneItemInCart.productId === item._id) {
