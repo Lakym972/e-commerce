@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import CartContext from "../../context/CartContext/CartContext";
+import CART_TYPES from "../../reducer/cartReducer/action";
 
 
 const ProductPage = () => {
@@ -12,7 +13,7 @@ const ProductPage = () => {
     url: `https://passerelle-shop-api.julienpoirier-webdev.com/products/${id}`,
   });
 
-  const { addToCart, removeOneFromCart, getQuantityInCart, isProductInCart } = useContext(CartContext);
+  const { getQuantityInCart, isProductInCart, dispatch } = useContext(CartContext);
 
   return (
     <div className="flex justify-center border-y">
@@ -35,7 +36,7 @@ const ProductPage = () => {
           {isProductInCart(id) ? (
             <div className="flex items-center mt-4">
               <button
-                onClick={() => addToCart(dataFetched)}
+                onClick={() => dispatch({ type: CART_TYPES.ADD, payload: {item: dataFetched} })}
                 className="bg-blue-500 text-white px-4 py-2 rounded-l-lg"
               >
                 +
@@ -44,7 +45,7 @@ const ProductPage = () => {
                 Quantité dans le panier: {getQuantityInCart(dataFetched._id)}
               </div>
               <button
-                onClick={() => removeOneFromCart(dataFetched)}
+                onClick={() =>dispatch({ type: CART_TYPES.REMOVE_ONE_QUANTITY, payload: {item: dataFetched} })}
                 className="bg-red-500 text-white px-4 py-2 rounded-r-lg"
               >
                 -
@@ -52,9 +53,7 @@ const ProductPage = () => {
             </div>
           ) : (
             <button
-              onClick={() => {
-                addToCart(dataFetched);
-              }}
+              onClick={() =>  dispatch({ type: CART_TYPES.ADD, payload: {item: dataFetched} })}
               className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4"
             >
               Ajouter au panier
